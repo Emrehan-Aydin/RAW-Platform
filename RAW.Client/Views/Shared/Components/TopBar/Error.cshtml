@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Error Page";
+    ViewBag.ErrorMessage = "";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center my-5">
+                    <h3 class="text-uppercase">Yüklenirken Hata oluştu, Yönetici ile iletişime geçiniz.</h3>
+                    <a href=@Url.Action("Index", "Login") class="fw-medium text-primary"> Giriş sayfasına yönlenmek için tıklayın.</a>
+                    <div class="mt-5 text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- JAVASCRIPT -->
+<script src="~/assets/libs/jquery/jquery.min.js"></script>
+<script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="~/assets/libs/node-waves/waves.min.js"></script>
+
+<script src="~/assets/js/app.js"></script>

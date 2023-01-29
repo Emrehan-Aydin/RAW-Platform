@@ -1,0 +1,86 @@
+﻿@using RAW.Client.Dto;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CommentModel
+
+<link href="~/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+<!-- DataTables -->
+<link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<script src="~/assets/js/pages/form-editor.init.js"></script>
+<script src="~/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="~/assets/js/pages/form-advanced.init.js"></script>
+<script src="~/assets/js/app.js"></script>
+
+<div class="row">
+    <div class="card card-body">
+        <div class="card-title">
+            <div class="col-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="comment text-justify float-left">
+                <input type="hidden" class="form-group" asp-for="@Model.ContentId" />
+                <div class="row">
+                    <div class="p-3 chat-input-section border-top">
+                        <div class="row">
+                            <p class="text-muted mb-3 font-14">
+                                Yorum yapabilirsin
+                            </p>
+                            <textarea asp-for="@Model.Message" id="textarea" class="form-control" maxlength="255" rows="4" placeholder="Yorum Yap" style="height: 111px;"></textarea>
+                            <div class="text-end mt-3">
+                                <button id="sendComment" class="btn btn waves-effect bg-info btn-rounded" text-primary>
+                                    <span class="text-white font-size-13">Yorumu Paylaş</span>
+                                    <i class="mdi mdi-send"></i>
+                                </button>
+                            </div>
+                            <script>
+                                $("#sendComment").click(function () {
+                                    var comment = $("#textarea").val()
+                                    var contentId = "@Model.ContentId"
+                                    if (comment) {
+                                        $.ajax({
+                                            type: "post",
+                                            url: "/Content/SubmitComment/",
+                                            data: { Message: comment, ContentId: contentId },
+                                            success: function (func) {
+                                                var result = func;
+                                                if (result.isSuccess) {
+                                                    Swal.fire({
+                                                        title: "Teşekkürler", text: result.message, icon: "success", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                                                    });
+                                                } else {
+                                                    Swal.fire({
+                                                        title: "Üzgünüz", text: result.message, icon: "error", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                                                    });
+                                                }
+                                            },
+                                            error: function (func, exception) {
+                                                Swal.fire({
+                                                    title: "Üzgünüz", text: "Bir hata meydana geldi", icon: "error", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                                                });
+                                            }
+                                        })
+                                    }
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+<script src="~/assets/js/pages/form-advanced.init.js"></script>
+
+<script src="~/assets/js/app.js"></script>

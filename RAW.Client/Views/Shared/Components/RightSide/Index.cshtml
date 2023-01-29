@@ -1,0 +1,95 @@
+﻿<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
+
+                <li>
+                    <a asp-action="Index" asp-controller="Dashboard" asp-route-menu="Index" asp-route-category="Document" class="waves-effect">
+                        <i class="ri-dashboard-line"></i>
+                        <span>Ana Sayfa</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-action="Index" asp-controller="Menu" asp-route-menu="UploadContent" class="waves-effect">
+                        <i class="ri-folder-upload-line"></i>
+
+                        @{
+                            if (Context.Request.Cookies["Menu"] == "new") {
+                                <span class="badge rounded-pill bg-success float-end">Yeni</span>
+                            }
+                        }
+                        <span>İçerik Yükle</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-action="Index" asp-controller="Menu" asp-route-menu="VideoContent" asp-route-category="Video" class="waves-effect">
+                        <i class="ri-video-fill"></i>
+                        @{
+                            if (Context.Request.Cookies["Video"] == "new") {
+                                <span class="badge rounded-pill bg-success float-end">Yeni</span>
+                            }
+                        }
+                        <span>Video</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a asp-action="Index" asp-controller="Menu" asp-route-menu="ImageContent" asp-route-category="Draw" class=" waves-effect">
+                        <i class="ri-image-line"></i>
+                        @{if (Context.Request.Cookies["Draw"]== "new")
+                        {
+                        <span class="badge rounded-pill bg-success float-end">Yeni</span>
+                        }}
+                        <span>Çizim</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-action="Index" asp-controller="Menu" asp-route-menu="VideoContent" asp-route-category="Music" class=" waves-effect">
+                        <i class="ri-music-2-line"></i>
+                        @{if (Context.Request.Cookies["Music"]== "new")
+                        {
+                        <span class="badge rounded-pill bg-success float-end">Yeni</span>
+                        }}
+                        <span>Müzik</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-action="Index" asp-controller="Menu" asp-route-menu="TextContent" asp-route-category="Document" class=" waves-effect">
+                        <i class="ri-article-line"></i>
+                        @{if (Context.Request.Cookies["Document"]== "new")
+                        {
+                        <span class="badge rounded-pill bg-success float-end">Yeni</span>
+                        }}
+                        <span>Makale</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-action="Index" asp-controller="Menu"
+                       asp-route-menu="TextContent" asp-route-category="Text"
+                       class=" waves-effect">
+                        <i class="ri-article-line"></i>
+                        @{if (Context.Request.Cookies["Text"] == "new")
+                        {
+                        <span class="badge rounded-pill bg-success float-end">Yeni</span>
+                        }}
+                        <span>Köşe Yazısı</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>
+<!-- Left Sidebar End -->

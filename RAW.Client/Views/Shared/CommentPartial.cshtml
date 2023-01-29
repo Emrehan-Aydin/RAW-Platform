@@ -1,0 +1,30 @@
+﻿@using RAW.Client.Dto;
+@model IEnumerable<CommentView>;
+
+@{
+    foreach (var comment in @Model) {
+        <div class="row">
+            <div class="card card-body">
+                <div class="card-title">
+                    <div class="col-12">
+                        <button type="submit" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user avatar-sm" src="@comment.ProfilePhoto"
+                             alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1 font-size-18">@comment.UserFullName</span>
+                            <span>- @comment.Date</span>
+                        </button>
+                    </div>
+                    <div class="col-8"></div>
+                </div>
+                <div class="row">
+                    <div class="comment text-justify float-left">
+                        <div class="row">
+                            <hr>
+                            <p>@comment.Comment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

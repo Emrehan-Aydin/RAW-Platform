@@ -1,0 +1,123 @@
+﻿@using RAW.Client.Dto;
+@model CreateUserRequest;
+@{
+}
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+<link rel="stylesheet" href="~/css/uploadimage.css">
+<div>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-lg-6">
+                <div class="authentication-page-content p-4 d-flex align-items-center min-vh-100">
+                    <div class="w-100">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-9">
+                                <div>
+
+                                    <div class="p-2 mt-2">
+                                        <form class="" method="post" enctype="multipart/form-data" action=@Url.Action("CreateUser", "Login")>
+
+                                            <div class="auth-form-group-custom mb-4">
+                                                <div class="profile-pic-wrapper">
+                                                    <div class="pic-holder">
+                                                        <!-- uploaded pic shown here -->
+                                                        <img id="profilepic" class="pic" src="~/assets/images/users/profilePhoto.jpg">
+
+                                                        <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                                                        <label for="newProfilePhoto" class="upload-file-block">
+
+                                                            <div class="text-center">
+                                                                <div class="mb-2">
+                                                                    <i class="fa fa-camera fa-2x"></i>
+                                                                </div>
+                                                                <div class="text-uppercase">
+                                                                    Güncelle <br /> Profil Fotoğrafı
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <p class="text-info text-center small">Profil Fotoğrafı Ekle</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="auth-form-group-custom mb-4">
+                                                <i class="ri-user-line auti-custom-input-icon"></i>
+                                                <label for="name">Adınız</label>
+                                                <input type="text" class="form-control" id="name" placeholder="Adınızı girin" asp-for="@Model.CreateProfileCommandRequest.Name">
+                                            </div>
+
+                                            <div class="auth-form-group-custom mb-4">
+                                                <i class="ri-user-line auti-custom-input-icon"></i>
+                                                <label for="surname">Soydınız</label>
+                                                <input type="text" class="form-control" id="surname" placeholder="Soyadınızı girin" asp-for="@Model.CreateProfileCommandRequest.Surname">
+                                            </div>
+
+                                            <div class="auth-form-group-custom mb-4">
+                                                <i class="ri-user-2-line auti-custom-input-icon"></i>
+                                                <label for="username">Kullanıcı Adı</label>
+                                                <input type="text" class="form-control" id="username" placeholder="Kullanıcı Adınızı girin" asp-for="@Model.CreateUserCommandRequest.Username">
+                                            </div>
+
+                                            <div class="auth-form-group-custom mb-4">
+                                                <i class="ri-user-2-line auti-custom-input-icon"></i>
+                                                <label for="email">Mail adresi</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Mailinizi girin" asp-for="@Model.CreateUserCommandRequest.Email">
+                                            </div>
+
+                                            <div class="auth-form-group-custom mb-4">
+                                                <i class="ri-lock-2-line auti-custom-input-icon"></i>
+                                                <label for="userpassword">Parola</label>
+                                                <input type="password" class="form-control" id="userpassword" placeholder="Parolanızı girin" asp-for="@Model.CreateUserCommandRequest.Password">
+                                            </div>
+
+                                            <div class="auth-form-group-custom mb-4">
+                                                <i class="ri-lock-2-line auti-custom-input-icon"></i>
+                                                <label for="userpassword">Tekrar Parola</label>
+                                                <input type="password" class="form-control" id="userconfirmpassword" placeholder="Parolanızı tekrar girin" asp-for="@Model.CreateUserCommandRequest.PasswordConfirm">
+                                            </div>
+
+
+                                            <div class="text-center">
+                                                <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Kayıt Ol</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="mt-2 text-center">
+                                        <p>Zaten bir hesabınız var mı ? <a href=@Url.Action("Index", "Login") class="fw-medium text-primary"> Giriş Yap</a> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JAVASCRIPT -->
+            <script src="~/assets/libs/jquery/jquery.min.js"></script>
+            <script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+            <script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+            <script src="~/assets/libs/node-waves/waves.min.js"></script>
+            <script src="~/assets/libs/node-waves/waves.min.js"></script>
+            <script src="~/js/Register.js"></script>
+
+            <!--tinymce js-->
+            <script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+
+            <!-- init js -->
+            <script src="~/assets/js/pages/form-editor.init.js"></script>
+
+            <script src="~/assets/js/app.js"></script>
+            <div class="col-lg-6">
+                <div class="authentication-bg position-relative">
+                    <div class="bg-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

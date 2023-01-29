@@ -1,0 +1,316 @@
+﻿@using RAW.Client.Dto;
+@{
+}
+@model UploadContentModel;
+
+
+<!-- JAVASCRIPT -->
+
+
+<link rel="stylesheet" href="~/assets/libs/twitter-bootstrap-wizard/prettify.css">
+
+<!-- Plugins css -->
+<link rel="stylesheet" href="~/css/uploadFile.css">
+<!-- jquery.vectormap css -->
+<link href="~/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+<!-- DataTables -->
+<link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<link href="~/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Plugins js -->
+
+<script src="~/assets/js/pages/sweet-alerts.init.js"></script>
+<script src="~/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="~/css/uploadFile.css">
+<script src="~/js/Register.js"></script>
+
+
+<script src="~/assets/js/pages/form-editor.init.js"></script>
+<script src="~/assets/js/pages/form-editor-2.init.js"></script>
+<script src="~/assets/js/pages/form-editor-3.init.js"></script>
+<script src="~/assets/js/pages/form-editor-4.init.js"></script>
+<script src="~/assets/js/pages/form-editor-5.init.js"></script>
+
+
+<meta name="description" content="@(ViewBag.Description)" />
+<meta name="description" content="@(Html.Raw(ViewBag.Description))" />
+
+@{
+    if (Model.Message != null) {
+        if (Model.IsSucceed) {
+            <script>
+                Swal.fire({
+                    title: "İçeriğiniz gönderildi", text: "@Html.Raw(Model.Message)", icon: "success", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                });
+            </script>
+        }
+        else {
+            <script>
+                Swal.fire({
+                    title: "Opps!", text: "@Html.Raw(Model.Message)", icon: "error", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                });
+            </script>
+        }
+    }
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Paylaşmak istediğin içeriği seç!</h4>
+                            <div id="basic-pills-wizard" class="twitter-bs-wizard">
+                                <ul class="twitter-bs-wizard-nav">
+                                    <li class="nav-item">
+                                        <a href="#upload-video" class="nav-link" data-toggle="tab">
+                                            <span class="step-number ri-video-fill"></span>
+                                            <span class="step-title">Video</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#upload-draw" class="nav-link" data-toggle="tab">
+                                            <span class="step-number ri-image-line"></span>
+                                            <span class="step-title">Çizim</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#upload-music" class="nav-link" data-toggle="tab">
+                                            <span class="step-number ri-music-2-line"></span>
+                                            <span class="step-title">Müzik</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#upload-document" class="nav-link" data-toggle="tab">
+                                            <span class="step-number ri-article-line"></span>
+                                            <span class="step-title">Makale</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#upload-text" class="nav-link" data-toggle="tab">
+                                            <span class="step-number ri-article-line"></span>
+                                            <span class="step-title">Köşe Yazısı</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content twitter-bs-wizard-tab-content">
+                                    <div class="tab-pane" id="upload-video">
+                                        <h4 class="card-title">İçeriğinin paylaşmak için bize link gönder :)</h4>
+                                        <p class="card-title-desc">
+                                            unutma video formatı www.youtube.com/embed/videoId şeklinde olmalıdır.
+                                        </p>
+                                        <form class="" method="post" enctype="multipart/form-data" action=@Url.Action("UploadVideo", "Content")>
+                                            <input class="form-control" type="hidden" value="Video" asp-for="@Model.Category">
+                                            <div>
+                                                <div class="row-md-2">
+                                                    <div class="col-2">
+                                                        <span class="font-size-15">Video linkini kopyala</span>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <input class="form-control" type="url" placeholder="https://www.youtube.com/embed/Id" id="example-url-input" asp-for="@Model.Link">
+                                                    </div>
+                                                    <div class="col-2 mt-2">
+                                                        <div class="square-switch">
+                                                            <div class="form-check form-check-right mb-3">
+                                                                <input class="form-check-input" type="checkbox" id="formCheckRight1" asp-for="@Model.Anonymous">
+                                                                <label class="form-check-label" for="formCheckRight1">
+                                                                    Profil Anonimleştirilsin mi?
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <row>
+                                                        <textarea id="elm1" class="form-control" placeholder="Bize çalışmandan bahset :)" asp-for="@Model.Abstract"></textarea>
+                                                    </row>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">İçeriği Gönder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="upload-draw">
+                                        <h4 class="card-title">İçeriğini yüklemek için bir video veya resim paylaş :)</h4>
+                                        <form class="" method="post" enctype="multipart/form-data" action=@Url.Action("UploadImage", "Content")>
+                                            <input class="form-control" type="hidden" value="Draw" asp-for="@Model.Category">
+                                            <div>
+                                                <div class="row-md-2">
+                                                    <div class="upload-pic-wrapper">
+                                                        <div class="pic-holder">
+                                                            <div class="row">
+                                                                <!-- uploaded pic shown here -->
+                                                                <img id="profilepic" class="pic" src="~/assets/images/sizeable.png">
+                                                                <label for="newProfilePhoto" class="upload-file-block">
+                                                                    <div class="text-center">
+                                                                        <div class="mb-2">
+                                                                            <i class="fa fa-camera fa-2x"></i>
+                                                                        </div>
+                                                                        <div class="text-uppercase">
+                                                                            İÇERİĞİNİ YÜKLE
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-2 mt-2">
+                                                            <div class="square-switch">
+                                                                <div class="form-check form-check-right mb-3">
+                                                                    <input class="form-check-input" type="checkbox" id="formCheckRight2" asp-for="@Model.Anonymous">
+                                                                    <label class="form-check-label" for="formCheckRight1">
+                                                                        Profil Anonimleştirilsin mi?
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <row>
+                                                        <textarea id="elm2" class="form-control" asp-for="@Model.Abstract"></textarea>
+                                                    </row>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light" asp-for="@Model.Category=" Music">İçeriği Gönder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="upload-music">
+                                        <h4 class="card-title">İçeriğinin paylaşmak için bize link gönder :)</h4>
+                                        <p class="card-title-desc">
+                                            unutma video formatı www.youtube.com/embed/videoId şeklinde olmalıdır.
+                                        </p>
+                                        <form class="" method="post" enctype="multipart/form-data" action=@Url.Action("UploadMusic", "Content")>
+                                            <input class="form-control" type="hidden" value="Music" asp-for="@Model.Category">
+                                            <div>
+                                                <div class="row-md-2">
+                                                    <div class="col-2">
+                                                        <span class="font-size-15">Müziğinin linkini kopyala</span>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <input class="form-control" type="url" placeholder="https://www.youtube.com/embed/Id" id="example-url-input" asp-for="@Model.Link">
+                                                    </div>
+                                                    <div class="col-2 mt-2">
+                                                        <div class="square-switch">
+                                                            <div class="form-check form-check-right mb-3">
+                                                                <input class="form-check-input" type="checkbox" id="formCheckRight3" asp-for="@Model.Anonymous">
+                                                                <label class="form-check-label" for="formCheckRight1">
+                                                                    Profil Anonimleştirilsin mi?
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <row>
+                                                        <textarea id="elm3" class="form-control" placeholder="Bize içeriğinden bahset :)" asp-for="@Model.Abstract"></textarea>
+                                                    </row>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <button type="submit" action=@Url.Action("UploadMusic", "Content") class="btn btn-primary waves-effect waves-light">İçeriği Gönder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="upload-document">
+                                        <h4 class="card-title">İçeriğinin paylaşmak için bize yaz gönder :)</h4>
+                                        <p class="card-title-desc">
+                                            Metnini özelleştirmeyi unutma
+                                        </p>
+                                        <form class="" method="post" action=@Url.Action("UploadDocument", "Content")>
+                                            <input class="form-control" type="hidden" value="Document" asp-for="@Model.Category">
+                                            <div>
+                                                <div class="row-md-2">
+                                                    <div class="col-12 text-center">
+                                                        <span class="font-size-15">Bize çalışmandan bahset</span>
+                                                    </div>
+                                                    <div class="row mt-2">
+                                                        <div class="square-switch">
+                                                            <div class="form-check form-check-right mb-3">
+                                                                <input class="form-check-input" type="checkbox" id="formCheckRight4" asp-for="@Model.Anonymous">
+                                                                <label class="form-check-label" for="formCheckRight1">
+                                                                    Profil Anonimleştirilsin mi?
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <row>
+                                                        <textarea id="elm4" class="form-control" placeholder="Neler araştırdığını göster bakalım" asp-for="@Model.Abstract"></textarea>
+                                                    </row>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">İçeriği Gönder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="upload-text">
+                                        <h4 class="card-title">İçeriğinin paylaşmak için bize yaz gönder :)</h4>
+                                        <p class="card-title-desc">
+                                            Metnini özelleştirmeyi unutma
+                                        </p>
+                                        <form class="" method="post" action=@Url.Action("UploadText", "Content")>
+                                            <input class="form-control" type="hidden" value="Text" asp-for="@Model.Category">
+                                            <div>
+                                                <div class="row-md-2">
+                                                    <div class="col-12 text-center">
+                                                        <span class="font-size-15">Bize bir köşe yazısı bırak :)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="square-switch">
+                                                        <div class="form-check form-check-right mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="formCheckRight1" asp-for="@Model.Anonymous">
+                                                            <label class="form-check-label" for="formCheckRight5">
+                                                                Profil Anonimleştirilsin mi?
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <row>
+                                                        <textarea id="elm5" class="form-control" placeholder="Hadi bize birşeyler anlat :)" asp-for="@Model.Abstract"></textarea>
+                                                    </row>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">İçeriği Gönder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/libs/jquery/jquery.min.js"></script>
+<script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="~/assets/libs/node-waves/waves.min.js"></script>
+
+<script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+<script src="~/assets/js/pages/form-wizard.init.js"></script>
+<script src="~/assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="~/assets/libs/twitter-bootstrap-wizard/prettify.js"></script>
+<script src="~/assets/js/pages/form-wizard.init.js"></script>
+
+

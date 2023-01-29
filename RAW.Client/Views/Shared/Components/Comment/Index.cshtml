@@ -1,0 +1,58 @@
+﻿@using RAW.Client.Dto;
+
+@model Pagination<CommentView>;
+
+@{
+    <input type="hidden" id="ContentId" asp-for=@Model.ContentId>
+    <div id="comments">
+        @Html.Partial("CommentPartial",@Model.Content)
+    </div>
+    <div id="loading" class="text-center">
+        <div class="spinner-grow text-primary m-1" role="status">
+        </div>
+        <div class="spinner-grow text-primary m-1" role="status">
+        </div>
+        <div class="spinner-grow text-primary m-1" role="status">
+        </div>
+    </div>
+}
+
+<script src="~/assets/libs/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+    var Page = 0
+    var pagingStop = false;
+    var ContentId = $("#ContentId").val()
+    $(window).scroll(function () {
+        //Scroll hareket ettiği zaman devreye girer.
+        //Bu algoritma ile ScrollBar'ın sayfanın en aşağı indiği anı yakalarız.
+        if ($(window).scrollTop() == $(document).height() - $(window).height() && !pagingStop) {
+            $("#loading").show()
+            $.ajax({
+                type: "post",
+                url: '/Content/LoadComment',
+                data: { Page: Page, Size: 10, ContentId: ContentId },
+                //Index Action metodunun aldığı sayfano isimli parametreye SayfaSayisi değişkenindeki değeri gönderiyoruz.
+                success: function (data) {
+                    setTimeout(function () {
+                        if (data == 'stopPaging') {
+                            pagingStop = true;
+                            $("#comments").append('<div class="alert alert-success alert-dismissible fade show" role="alert"> Tüm Yorumlar görüntülendi!</div>')
+                            $("#loading").hide()
+                            return;
+                        }
+                        Page++
+                        $("#comments").append(data)
+                        $("#loading").hide()
+                    });
+                    $("#loading").show()
+                },
+
+                error: function () {
+                    console.log("hata")
+                }
+            });
+        }
+    })
+
+</script>

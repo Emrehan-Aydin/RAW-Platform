@@ -1,0 +1,132 @@
+﻿@using RAWAPI.Domain.Dtos.Response.Profile;
+@{
+    ViewBag.Title = "Error Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model GetUserProfileResponse;
+<link rel="stylesheet" href="~/css/profileuploadimage .css">
+<!-- jquery.vectormap css -->
+<link href="~/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+<!-- DataTables -->
+<link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+    <h4 class="mb-sm-0">Profilim</h4>
+</div>
+<div class="card-body rounded bg-white">
+    <div class="row">
+        <form class="" method="post" enctype="multipart/form-data" action=@Url.Action("UpdateProfile", "Profile")>
+            <div class="border-right">
+                <div class="row auth-form-group-custom mb-4">
+                    <div class="col-5"></div>
+                    <div class="col-md-2">
+                        <div class="profile-pic-wrapper">
+                            <div class="pic-holder">
+                                <div class="row">
+                                    <!-- uploaded pic shown here -->
+                                    <img id="profilepic" class="pic" src=@Model.PhotoUrl>
+                                </div>
+                                <div class="row">
+                                    <label for="newProfilePhoto" class="upload-file-block">
+                                        <div class="text-center">
+                                            <div class="mb-2">
+                                                <i class="fa fa-camera fa-2x"></i>
+                                            </div>
+                                            <div class="text-uppercase">
+                                                Güncelle <br /> Profil Fotoğrafı
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5"></div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-md-6 d-grid">
+                            <span class="badge rounded-pill bg-primary font-size-18 font-weight-bold text-center">@Model.Name @Model.Surname</span>
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                </div>
+                <hr class="mt-2" />
+                <div class="row mt-2">
+                    <div class="col-md-12 border-right">
+
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                <label class="labels font-size-18 mt-2">Ad</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="text" class="form-control" placeholder="Adınız" asp-for="@Model.Name">
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-2">
+                                <label class="labels font-size-18 mt-2">Soyad</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="text" class="form-control" placeholder="Soyadınız" asp-for="@Model.Surname">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                <label class="labels font-size-18 mt-2">Doğum Tarihi</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="date" class="form-control" asp-for="@Model.BirthDate">
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-2">
+                                <label class="labels font-size-18 mt-2">Email Adresi</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="email" class="form-control" placeholder="Mail Adresiniz" asp-for="@Model.Email">
+                            </div>
+                        </div>
+                        <hr class="mt-2" />
+                        <div class="row mt-2">
+                            <row>
+
+                            </row>
+                            <row>
+                                <textarea id="elm1" class="form-control" asp-for="Abstract">@Model.Abstract</textarea>
+                            </row>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="mt-2" />
+                <div class="row mt-2">
+                    <div class="mt-5 text-center d-grid"><button class="btn btn-primary btn-lg waves-effect waves-light" type="submit">Değişiklikleri Kaydet</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script src="~/assets/libs/jquery/jquery.min.js"></script>
+<script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="~/assets/libs/node-waves/waves.min.js"></script>
+
+<!--tinymce js-->
+<script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+
+<!-- init js -->
+<script src="~/assets/js/pages/form-editor.init.js"></script>
+<script src="~/js/Register.js"></script>
+
+<script src="~/assets/js/app.js"></script>
+
+
+<!-- Plugins js -->
+
+<script src="~/assets/js/app.js"></script>

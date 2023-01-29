@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.pTitle = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- jquery.vectormap css -->
+<link href="~/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+<!-- DataTables -->
+<link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <div class="col-3"></div>
+            <div class="d-flex justify-content-center">
+                <img src="~/assets/images/logo-dark.png" width="500" />
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Tanıtım</h4>
+            <p class="card-title-desc">
+                Merhaba, Ben RAWIO
+            </p>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills nav-justified" role="tablist">
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#menu-1" role="tab">
+                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                        <span class="d-none d-sm-block">Tanıtım</span>
+                    </a>
+                </li>
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link" data-bs-toggle="tab" href="#menu-2" role="tab">
+                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                        <span class="d-none d-sm-block">Nasıl Kullanılır</span>
+                    </a>
+                </li>
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link" data-bs-toggle="tab" href="#menu-3" role="tab">
+                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                        <span class="d-none d-sm-block">Destek</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content p-3 text-muted">
+                <div class="tab-pane active" id="menu-1" role="tabpanel">
+                    <p class="mb-0">
+                        Merhaba platformumuz, günde bir yenilenen içerikleriyle kendini kanıtlamak isteyenlerin merkezi,
+                        eğer sen de menüde görülen içeriklerden birine ilgi duyuorsan içerik yüklemeyi deneyebilirsin! :)
+                        İyi şanslar...
+                    </p>
+                </div>
+                <div class="tab-pane" id="menu-2" role="tabpanel">
+                    <p class="mb-0">
+                       Merhaba,
+                       Menüde görmüş olduğun içerik yükle sekmesine tıklayarak, ilgi duyduğun içeriklerden birine gir ve içeriğini yükle!
+                       içeriğinin paylaşılması zaman alabilir. ama o gün elbet gelecek! :)
+                    </p>
+                </div>
+                <div class="tab-pane" id="menu-3" role="tabpanel">
+                    <p class="mb-0">
+                        Merhaba, eğer bir konuda destek almak istiyorsanız. Bunu rawio.destek@rawio.com adresimize mail bırakabilirsin.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<!-- App js -->
+<script src="~/assets/js/app.js"></script>
+<script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

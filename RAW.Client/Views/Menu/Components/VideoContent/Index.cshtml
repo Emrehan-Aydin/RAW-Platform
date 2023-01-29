@@ -1,0 +1,121 @@
+﻿@using RAW.Client.ViewModels;
+@{
+
+}
+@model ContentViewModel;
+
+
+
+<link href="~/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Plugins js -->
+
+<script src="~/assets/js/pages/sweet-alerts.init.js"></script>
+<script src="~/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+@{
+    if (Model.Message != null) {
+        if (Model.IsSucceed) {
+            <script>
+                Swal.fire({
+                    title: "İçeriğiniz gönderildi", text: "@Html.Raw(Model.Message)", icon: "success", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                });
+            </script>
+        }
+        else {
+            <script>
+                Swal.fire({
+                    title: "Opps!", text: "@Html.Raw(Model.Message)", icon: "error", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                });
+            </script>
+        }
+    }
+}
+<!-- Plugins css -->
+<!-- Plugins js -->
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <!-- 16:9 aspect ratio -->
+                <div class="ratio ratio-16x9">
+                    <iframe title="YouToube Video" src="@Model.Link" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+@if (Model.Abstract != null) {
+    <div class="card">
+        <div class="card-body">
+            <div class="row container">
+                @Html.Raw(@Model.Abstract)
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown3"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="rounded-circle header-profile-user avatar-sm" src="@Model.ProfilePhoto"
+                     alt="Header Avatar">
+                <span class="d-none d-xl-inline-block ms-1 font-size-18">@Model.UserFullName</span>
+                <span>- @Model.CreatedDate</span>
+            </button>
+            <div class="rating-star text-center">
+                <input id="rate" asp-for="@Model.UserRate" type="hidden" class="rating" data-filled="mdi mdi-star text-warning" data-start="1" data-stop="10" data-empty="mdi mdi-star-outline text-warning" data-fractions="1" />
+            </div>
+            <button id="rateButton" class="btn btn waves-effect bg-info btn-rounded" text-primary>
+                <span class="text-white font-size-13">İçeriği Oyla</span>
+            </button>
+            <script>
+                $("#rateButton").click(function () {
+                    var rate = $("#rate").val()
+                    var contentId = "@Model.Id"
+                    $.ajax({
+                        type: "post",
+                        url: "/Content/SubmitRate/",
+                        data: { Rate: rate ? rate : 0, ContentId: contentId },
+                        success: function (func) {
+                            var result = func;
+                            if (result.isSuccess) {
+                                Swal.fire({
+                                    title: "Teşekkürler", text: result.message, icon: "success", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Üzgünüz", text: result.message, icon: "error", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                                });
+                            }
+                        },
+                        error: function (func, exception) {
+                            Swal.fire({
+                                title: "Üzgünüz", text: "Bir hata meydana geldi", icon: "error", showCancelButton: !0, confirmButtonColor: "#5664d2", cancelButtonColor: "#ff3d60"
+                            });
+                        }
+                    })
+                })
+            </script>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-0">
+@await Component.InvokeAsync("CommentTool",@Model.Id)
+</div>
+
+<div class="container-fluid p-0">
+    @await Component.InvokeAsync("Comment")
+</div>
+
+
+<script src="~/assets/js/pages/rating-init.js"></script>
+<script src="~/assets/libs/bootstrap-rating/bootstrap-rating.min.js"></script>
+<link href="~/assets/libs/bootstrap-rating/bootstrap-rating.css" rel="stylesheet" type="text/css" />
+
+
